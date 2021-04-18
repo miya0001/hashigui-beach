@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>ドローンで撮影した写真をつかった橋杭岩の3Dモデル</title>
+		<title>ドローンで撮影した写真をつかった橋杭海水浴場の3Dモデル</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<meta property="og:image" content="https://www.evernote.com/l/ABVDR7Z4rF5Bx7oZ_Gan6r_hc9_N4aTzsikB/image.png" />
@@ -49,7 +49,7 @@
 				document.body.appendChild( container );
 
 				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
-				camera.position.z = 250;
+				camera.position.z = 100;
 
 				// scene
 
@@ -90,10 +90,7 @@
 							.setMaterials( materials )
 							.setPath( './assets/' )
 							.load( 'scene_mesh_textured.obj', function ( object ) {
-
-								object.position.y = 0;
-								object.rotation.x = 135
-								//object.position.set(0, 0, -53);
+								object.scale.set(1,1,1);
 								scene.add( object );
 
 							}, onProgress, onError );
@@ -130,15 +127,14 @@
 
 			function onDocumentMouseMove( event ) {
 
-				mouseX = ( event.clientX - windowHalfX ) / 2;
-				mouseY = ( event.clientY - windowHalfY ) / 2;
-
+				mouseX = ( event.clientX - windowHalfX ) / 5;
+				mouseY = ( event.clientY - windowHalfY ) / 5;
 			}
 
 			function onDocumentTouchMove( event ) {
 
-				mouseX = ( event.touches[0].clientX - windowHalfX ) / 2;
-				mouseY = ( event.touches[0].clientY - windowHalfY ) / 2;
+				mouseX = ( event.touches[0].clientX - windowHalfX ) / 5;
+				mouseY = ( event.touches[0].clientY - windowHalfY ) / 5;
 
 			}
 
@@ -152,8 +148,7 @@
 			}
 
 			function render() {
-
-				camera.position.x += ( mouseX - camera.position.x ) * .05;
+				camera.position.x += ( - mouseX - camera.position.x ) * .05;
 				camera.position.y += ( - mouseY - camera.position.y ) * .05;
 
 				camera.lookAt( scene.position );
@@ -161,8 +156,6 @@
 				renderer.render( scene, camera );
 
 			}
-
-			event.preventDefault();
 		</script>
 
 	</body>
